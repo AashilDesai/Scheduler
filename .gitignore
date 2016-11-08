@@ -1,0 +1,12 @@
+#Some files we will want to ignore:
+
+#Personal usage (like data, which depends on the user):
+*.txt
+*.zip
+*.tgz
+*.rar
+
+#OS stuff (which we want to keep out of the repo)
+.DS_Store
+._*
+
