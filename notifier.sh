@@ -1,10 +1,7 @@
 #!/bin/bash
 
-for f in $(ls schedule)
+cd /storage/projects/Scheduler/schedule
+while read -r line
 do
-	while read -r line
-	do
-		IFS=' ' read -r -a words <<< $line
-		at "${words[1]}" $f echo "${words[0]}"
-	done < $f
-done
+	echo "notify-send '${line:4}'" | at ${line:0:4} $(date '+%m%d%Y')
+done < $(date '+%Y/%m/%d')
