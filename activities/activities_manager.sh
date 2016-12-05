@@ -33,33 +33,32 @@ valid_date ()
 	if ( [[ $# -ne 3 ]] )
 	then
 		echo 1
-	fi
-
-	if ( ! [[ $1 =~ '^[0-9]+$' ]] )
-
-	if ( [[ $1 -lt 0 ]] || [[ $1 -gt 12 ]] ) #month
+	elif ! [[ "$1" =~ ^-?[0-9]+$ ]] 
 	then
-		echo 1
+		#it's not a number, so 
+		echo 2
+	elif ! [[ "$2" =~ ^-?[0-9]+$ ]]
+	then
+		#it's not a number, so 
+		echo 3
+	elif ! [[ "$3" =~ ^-?[0-9]+$ ]]
+	then
+		#it's not a number, so 
+		echo 4
+	elif ( [[ $1 -lt 0 ]] || [[ $1 -gt 12 ]] ) #month
+	then
+		echo 5
+	elif ( [[ $2 -lt 0 ]] || [[ $2 -gt 31 ]] ) #day
+	then
+		echo 6
+	elif ( [[ $3 -lt 0 ]] || [[ $3 -gt 99 ]] ) #year
+	then
+		echo 6
+	else
+		echo 0
 	fi
 }
 
-#Helper function which extracts year of a date
-get_year()
-{
-	echo 'blah'
-}
-
-#Helper function which extracts month of a date
-get_month()
-{
-	echo 'blah'
-}
-
-#Helper function that gets day of a date
-get_date()
-{
-	echo 'blah'
-}
 
 parse_input ()
 {
@@ -68,24 +67,43 @@ parse_input ()
 		#they're asking for the tasks on a day
 		if( [[ $2 == "today" ]] || [[ $# -eq 1 ]] )
 			then
-			#want today's tasks
-			echo "today"
+			month=`date +%m`
+			day=`date +%d`
+			year=`date +%y`
+
+			bash tasks.sh $month $day $year
 		elif ( [[ $# -gt 5 ]] )
-		then
+			then
 			echo 'Unrecognized command. Must enter "[task/tasks] [date]"'
 		elif ( [[ $2 == "tomorrow" ]] || [[ $2 == "t" ]] )
 			then
 			#get tomorrow's tasks
-			echo "tmmr"
+			month=`date +%m`
+			day=`date +%d`
+			year=`date +%y`
+
+			day=$((day+1))
+
+			bash tasks.sh $month $day $year
 		elif ( [[ $2 == "yesterday" ]] || [[ $2 == "y" ]] )
 			then
 			#get yesterday tasks
-			echo "ystr"
+			month=`date +%m`
+			day=`date +%d`
+			year=`date +%y`
+
+			day=$((day-1))
+
+			bash tasks.sh $month $day $year
 		else
-			echo 'date boiz'
 			#now it's a date, so we have to parse it
 			blah=$(valid_date $2 $3 $4)
-			echo $blah
+			if [[ $blah -eq 0 ]]
+				then
+				bash tasks.sh $2 $3 $4
+			else
+				echo "That's an invalid date"
+			fi
 		fi
 	fi
 }
