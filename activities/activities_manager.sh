@@ -13,9 +13,9 @@
 
 #For storing a task on a day:
 #set [date] [time] [task]
-	#date formats: "t", "tomorrow", "today", Month Day Year (day can be 2 digits or 1, month same, year 2 or 4)
-	#time can be 24 hour or 12-our (followed by pm or am (caps irrelevant))
-	#if no date, assumed for today
+	#date formats: "t", "tomorrow", "today", Month Day Year (day is 2 digits, month is two digits, year is two digits)
+	#time will be 24 hours
+	#if words "today", "tomorrow", "yesterday"
 	#if invalid time or task is blank, will throw error
 
 #for removing, same except "remove [date] [time] [task]"
@@ -27,13 +27,13 @@
 #for ask what to do "tasks", workds (defaults to [tasks today])
 
 
-#Helper function which sees if a date is correct
+#Helper function which sees if a date is correct (0) or not (anything else)
 valid_date ()
 {
 	if ( [[ $# -ne 3 ]] )
 	then
 		echo 1
-	elif ! [[ "$1" =~ ^-?[0-9]+$ ]] 
+	elif ! [[ "$1" =~ ^-?[0-9]0-9]$ ]] 
 	then
 		#it's not a number, so 
 		echo 2
@@ -57,6 +57,12 @@ valid_date ()
 	else
 		echo 0
 	fi
+}
+
+#Helper function that sees if time is proper 24 hour (0), 12hour (1) or wrong (anyhting else)
+valid_time ()
+{
+	echo 'yo'
 }
 
 
@@ -97,14 +103,26 @@ parse_input ()
 			bash tasks.sh $month $day $year
 		else
 			#now it's a date, so we have to parse it
-			blah=$(valid_date $2 $3 $4)
-			if [[ $blah -eq 0 ]]
+			entered_date=$(valid_date $2 $3 $4)
+			if [[ $entered_date -eq 0 ]]
 				then
 				bash tasks.sh $2 $3 $4
 			else
-				echo "That's an invalid date"
+				echo "That's an invalid date: $en"
 			fi
 		fi
+	elif ( [[ $1 == "set" ]] )
+	then	
+		#so now we need to set the date
+			entered_date=$(valid_date $2 $3 $4)
+			if [[ $entered_date -eq 0 ]]
+				then
+				
+				##TODOTODOTODO
+
+			else
+				echo "That's an invalid date"
+			fi
 	fi
 }
 

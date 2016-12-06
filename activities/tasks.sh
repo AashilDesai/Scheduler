@@ -19,7 +19,7 @@ elif [ ! -f "../schedule/${3}/${2}/${1}" ]  #assuming format is just "day number
 	do
 		hour=${line:0:2}
 		minute=${line:2:4}
-		task=${line:5}
+		task=${line:4}
 		echo "${hour}:${minute} $task"
 	done
 	#statements
