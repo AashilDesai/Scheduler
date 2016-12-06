@@ -2,6 +2,7 @@
 
 cd /storage/projects/Scheduler/schedule
 
+# Loop through the activities for the current day and setup push notifications for them
 if [ ! -f $(date '+%Y/%m/%d') ]
 	then
 	echo "No activities for today!"

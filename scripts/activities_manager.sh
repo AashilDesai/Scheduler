@@ -22,8 +22,6 @@
 
 #for studymode, "study", "studymode" and "study" will all work, end studymode
 
-#for desktop notification, "desktop on", "desktop off", and "desktop" all work (last toggles)
-
 #for ask what to do "activities", workds (defaults to [activities today])
 
 

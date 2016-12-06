@@ -35,3 +35,4 @@ Tasks are best viewed as one-off assignments that the user plans to work on unti
 So for example, a meeting at 8PM on friday is an activity. Preparing the powerpoint slides for that meeting is a task.
 
 **System Requirements and Push Notification**
+Most of the functionality of this app is native to linux. Python with pandas installed is necessary for sorting the tasks and the push notifications are specific to your desktop environment. On KDE, notify-send is the command for sending a push notification, but that will have to be changed depending on your desktop environment.
