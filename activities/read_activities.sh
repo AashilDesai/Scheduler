@@ -14,11 +14,13 @@ elif [ ! -d "../schedule/${3}/${2}" ] #so month doesn't exist
 	echo $failureMessage
 elif [ ! -f "../schedule/${3}/${2}/${1}" ]  #assuming format is just "day number"
 	then
-	echo "Tasks for ${1}/{2}/{3}:"
+	echo $failureMessage
+else
+	echo "Tasks for ${1}/${2}/${3}:"
 	cat $filename | while read line
 	do
 		hour=${line:0:2}
-		minute=${line:2:4}
+		minute=${line:2:2}
 		task=${line:4}
 		echo "${hour}:${minute} $task"
 	done
