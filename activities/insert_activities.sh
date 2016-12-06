@@ -17,4 +17,6 @@ fi
 
 echo "${4}${5}" >> "../schedule/${3}/${2}/${1}" #append "[time][activity]" to file
 
+#SORT?
+
 echo "Activity \"${5}\" inserted on ${1}/${2}/${3} at ${4:0:2}:${4:2}."

@@ -183,7 +183,6 @@ parse_input ()
 	elif ( [[ $1 == "add" ]]  && ( [[ $2 == "task" ]] || [[ $2 == "tasks" ]] ) )
 		then
 		bash add_task.sh $3 $4 $5 "$6"
-	fi
 
 }
 
